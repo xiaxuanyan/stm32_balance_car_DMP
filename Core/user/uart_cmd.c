@@ -262,7 +262,7 @@ void Frame_Process(void)
     else if (!strcmp(frame, "DKD")) parameter = &pid_balance.kd;
     else if (!strcmp(frame, "VKP")) { parameter = &pid_speed.kp; limit = 20.0f; }
     else if (!strcmp(frame, "VKI")) { parameter = &pid_speed.ki; limit = 20.0f; }
-    else if (!strcmp(frame, "PKP")) { parameter = &pid_position.kp; limit = 0.002f; }
+    else if (!strcmp(frame, "PKP")) { parameter = &pid_position.kp; limit = 0.005f; }
     else if (!strcmp(frame, "PLIM")) { parameter = &pid_position.output_max; limit = 25.0f; }
     else if (!strcmp(frame, "TKP")) parameter = &pid_turn.kp;
     else if (!strcmp(frame, "ASP")) { parameter = &target_speed; limit = 500.0f; }

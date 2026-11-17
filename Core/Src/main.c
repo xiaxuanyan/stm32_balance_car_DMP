@@ -174,11 +174,11 @@ while (1)
          *  速度目标，速度环输出量，速度环积分输出量，直立环P输出量，直立环D输出量
          *  位置环输出量，转向环输出量,转向环误差
          */
-        UART_Printf(":%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\r\n",
+        UART_Printf(":%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\r\n",
                     angle, raw_gx, speedA, speedB, speed_filt, balance_pwm,
                     position_speed_target, pid_speed.output, pid_speed.integral,
                     pid_balance.kp * pid_balance.error, -pid_balance.kd * raw_gx,
-                    pid_position.output,pid_turn.output,pid_turn.error);
+                    pid_position.output,pid_turn.output,pid_turn.error,__HAL_TIM_GET_COMPARE(&htim4, TIM_CHANNEL_1),__HAL_TIM_GET_COMPARE(&htim4, TIM_CHANNEL_2));
     }
 
     /*

@@ -512,11 +512,6 @@ void Balance_Poll(void)
     if (!isfinite(balance_pwm) || !isfinite(turn)) { fault_stop(FAULT_IMU); return; }
     /* The timer ISR may have faulted during the read/calculation. Never re-enable here. */
     if (balance_state == BALANCE_RUNNING) {
-//		if(turn > 0.0f){
-//		turn += 82.0;
-//		}else{
-//		turn -= 82;
-//	}
         MotorA_SetSpeed(balance_pwm + turn);
         MotorB_SetSpeed(balance_pwm - turn);
     }

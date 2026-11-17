@@ -72,7 +72,7 @@ float pid_pi(pid_t *pid, float speed, float target_speed){
     return pid->output;
 }
 
-/*===============转向 和位置环共用PID母板：输出=Kp*(目标两轮速度差-实际两轮速度差)，最后限幅===============*/
+/*===============转向：输出=Kp*(目标两轮速度差-实际两轮速度差)，最后限幅===============*/
 float pid_p(pid_t *pid, float current, float target){
     pid->error = target - current;
     pid->output = pid->kp * pid->error;
