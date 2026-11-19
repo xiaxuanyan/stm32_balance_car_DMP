@@ -2,8 +2,8 @@
 #include <Arduino.h>
 #include "st7789.h"
 // Candidate pins only: ensure your specific board exposes them and does not use them for memory or peripherals.
-#define BALANCE_UART_RX 16
-#define BALANCE_UART_TX 17
+#define BALANCE_UART_RX 17
+#define BALANCE_UART_TX 18
 #define BALANCE_UART_BAUD 115200
 void BalanceLink_Init();
 void BalanceLink_Poll();
