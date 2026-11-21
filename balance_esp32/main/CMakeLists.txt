@@ -4,9 +4,15 @@ idf_component_register(
         "../balance_link.c"
         "../balance_protocol.c"
         "../st7789.c"
+        "../espnow_main.c"
     PRIV_REQUIRES
         esp_driver_gpio
         esp_driver_spi
         esp_driver_uart
+        esp_event
+        esp_hw_support
+        esp_netif
         esp_timer
+        esp_wifi
+        nvs_flash
 )
