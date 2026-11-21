@@ -1,0 +1,12 @@
+idf_component_register(
+    SRCS
+        "../main.c"
+        "../balance_link.c"
+        "../balance_protocol.c"
+        "../st7789.c"
+    PRIV_REQUIRES
+        esp_driver_gpio
+        esp_driver_spi
+        esp_driver_uart
+        esp_timer
+)
