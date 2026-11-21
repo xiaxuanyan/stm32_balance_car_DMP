@@ -86,9 +86,9 @@ static void push_strip(uint16_t y) {
 void ST7789_Init(void) {
   // 1. 初始化 DC、RST（及可选背光 BL）为输出
   uint64_t pin_mask = (1ULL << ST7789_PIN_DC) | (1ULL << ST7789_PIN_RST);
-  if (ST7789_PIN_BL >= 0) {
+  #if ST7789_PIN_BL >= 0
     pin_mask |= (1ULL << ST7789_PIN_BL);
-  }
+  #endif
   gpio_config_t io_conf = {
     .pin_bit_mask = pin_mask,
     .mode = GPIO_MODE_OUTPUT,
@@ -98,9 +98,9 @@ void ST7789_Init(void) {
   };
   ESP_ERROR_CHECK(gpio_config(&io_conf));
 
-  if (ST7789_PIN_BL >= 0) {
+  #if ST7789_PIN_BL >= 0
     gpio_set_level(ST7789_PIN_BL, 1);
-  }
+  #endif
 
   // 2. 初始化 SPI 总线（只配 MOSI 和 SCK，屏幕不需要 MISO）
   spi_bus_config_t buscfg = {

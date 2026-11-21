@@ -25,7 +25,7 @@ void BalanceFrameParser_Reset(BalanceFrameParser *parser) {
   }
 }
 
-bool BalanceFrameParser_Push(BalanceFrameParser *parser, uint8_t byte, struct ST7789_Status *status) {
+bool BalanceFrameParser_Push(BalanceFrameParser *parser, uint8_t byte, ST7789_Status *status) {
   if (!parser || !status) return false;
   //判断帧头
   if (parser->used == 0 && byte != 0xA5) return false;
@@ -39,17 +39,19 @@ bool BalanceFrameParser_Push(BalanceFrameParser *parser, uint8_t byte, struct ST
   //验证成功，进行字节拼接成数据放到frame数组
   if (valid) {
     ST7789_Status next = {0};
-    next.angle = i32(parser->frame+6) / 100.0f;
-    next.gyro = i32(parser->frame+10) / 100.0f;
+    next.angle     = i32(parser->frame+6) / 100.0f;
+    next.gyro      = i32(parser->frame+10) / 100.0f;
     next.encoder_a = i32(parser->frame+14) / 100.0f;
     next.encoder_b = i32(parser->frame+18) / 100.0f;
-    next.pwm_a = u16(parser->frame+22);
-    next.pwm_b = u16(parser->frame+24);
-    next.state=parser->frame[26];
-    next.fault=parser->frame[27];
-    next.stby=parser->frame[28];
-    next.key=parser->frame[29];
-    status=next; parser->used=0; return true;
+    next.pwm_a     = u16(parser->frame+22);
+    next.pwm_b     = u16(parser->frame+24);
+    next.state     = parser->frame[26];
+    next.fault     = parser->frame[27];
+    next.stby      = parser->frame[28];
+    next.key       = parser->frame[29];
+    *status = next;
+    parser->used = 0;
+    return true;
   }
   // 判断条件（valid）不符，遍历数组，可能已经混入了下一帧的一部分，看是否会出现帧头，重新重帧头组合
   for (uint8_t i=1; i<31; ++i) {
